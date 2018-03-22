@@ -11,9 +11,9 @@ function getHandlersForElement(element) {
 }
 
 function getAlreadyHasHandler(element, type, handler) {
-  const handlersForElement = getHandlersForElement(element);
-  if (handlersForElement) {
-    const typeHandlers = handlersForElement[type];
+  const handlers = getHandlersForElement(element);
+  if (handlers) {
+    const typeHandlers = handlers[type];
     if (typeHandlers) {
       return typeHandlers.includes(handler);
     }
@@ -22,33 +22,33 @@ function getAlreadyHasHandler(element, type, handler) {
 }
 
 function findOrCreateHandlersForElement(element, type) {
-  const handlersForElement = getHandlersForElement(element) || {};
-  if (!handlersForElement[type]) handlersForElement[type] = [];
-  return handlersForElement;
+  const handlers = getHandlersForElement(element) || {};
+  if (!handlers[type]) handlers[type] = [];
+  return handlers;
 }
 
 function add(element, type, handler) {
-  const handlersForElement = findOrCreateHandlersForElement(element, type);
-  handlersForElement[type].push(handler);
-  registered.set(element, handlersForElement);
+  const handlers = findOrCreateHandlersForElement(element, type);
+  handlers[type].push(handler);
+  registered.set(element, handlers);
   element.addEventListener(type, handler);
 }
 
 function remove(element, type, handler) {
-  const handlersForElement = getHandlersForElement(element);
+  const handlers = getHandlersForElement(element);
   var didRemove = false;
-  if (handlersForElement) {
-    const typeHandlers = handlersForElement[type];
+  if (handlers) {
+    const typeHandlers = handlers[type];
     if (typeHandlers) {
       const filteredTypeHandlers = typeHandlers.filter(h => h === handler);
       didRemove = filteredTypeHandlers.length !== typeHandlers;
-      handlersForElement[type] = filteredTypeHandlers;
-      if (handlersForElement[type].length === 0) {
-        delete handlersForElement[type];
+      handlers[type] = filteredTypeHandlers;
+      if (handlers[type].length === 0) {
+        delete handlers[type];
       }
     }
     if (didRemove) {
-      registered.set(element, handlersForElement);
+      registered.set(element, handlers);
       element.removeEventListener(type, handler);
     }
   }
