@@ -8,6 +8,28 @@ describe('toggleEventListener()', () => {
     expect(toggleEventListener(element, 'click', handler)).toBe(element);
   });
 
+  describe('without required arguments', () => {
+    it('should throw an error.', () => {
+      const element = document.createElement('div');
+      const type = 'mousemove';
+      const handler = jest.fn();
+      expect(() => toggleEventListener()).toThrowErrorMatchingSnapshot();
+      expect(() => toggleEventListener(element)).toThrowErrorMatchingSnapshot();
+      expect(() =>
+        toggleEventListener(element, type)
+      ).toThrowErrorMatchingSnapshot();
+      expect(() =>
+        toggleEventListener(undefined, type, handler)
+      ).toThrowErrorMatchingSnapshot();
+      expect(() =>
+        toggleEventListener(element, undefined, handler)
+      ).toThrowErrorMatchingSnapshot();
+      expect(() =>
+        toggleEventListener(element, type, undefined)
+      ).toThrowErrorMatchingSnapshot();
+    });
+  });
+
   describe('adding', () => {
     it('should add the event handler if one is not already added.', () => {
       expect.assertions(1);
