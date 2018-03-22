@@ -40,8 +40,8 @@ function remove(element, type, handler) {
   if (handlers) {
     const typeHandlers = handlers[type];
     if (typeHandlers) {
-      const filteredTypeHandlers = typeHandlers.filter(h => h === handler);
-      didRemove = filteredTypeHandlers.length !== typeHandlers;
+      const filteredTypeHandlers = typeHandlers.filter(h => h !== handler);
+      didRemove = filteredTypeHandlers.length !== typeHandlers.length;
       handlers[type] = filteredTypeHandlers;
       if (handlers[type].length === 0) {
         delete handlers[type];
