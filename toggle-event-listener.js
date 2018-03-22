@@ -1,4 +1,4 @@
-const handlers = new WeakMap();
+const registered = new WeakMap();
 /*
 {
   [element]: {
@@ -7,7 +7,7 @@ const handlers = new WeakMap();
 }
 */
 function getHandlersForElement(element) {
-  return handlers.get(element);
+  return registered.get(element);
 }
 
 function getAlreadyHasHandler(element, type, handler) {
@@ -30,7 +30,7 @@ function findOrCreateHandlersForElement(element, type) {
 function add(element, type, handler) {
   const handlersForElement = findOrCreateHandlersForElement(element, type);
   handlersForElement[type].push(handler);
-  handlers.set(element, handlersForElement);
+  registered.set(element, handlersForElement);
   element.addEventListener(type, handler);
 }
 
@@ -48,7 +48,7 @@ function remove(element, type, handler) {
       }
     }
     if (didRemove) {
-      handlers.set(element, handlersForElement);
+      registered.set(element, handlersForElement);
       element.removeEventListener(type, handler);
     }
   }
