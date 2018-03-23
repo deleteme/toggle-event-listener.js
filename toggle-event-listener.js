@@ -6,52 +6,35 @@ const registered = new WeakMap();
   }
 }
 */
-function getHandlersForElement(element) {
-  return registered.get(element);
-}
-
 function getAlreadyHasHandler(element, type, handler) {
-  const handlers = getHandlersForElement(element);
+  const handlers = registered.get(element);
   if (handlers) {
     const typeHandlers = handlers[type];
     if (typeHandlers) {
-      return typeHandlers.includes(handler);
+      return typeHandlers.has(handler);
     }
   }
   return false;
 }
 
 function findOrCreateHandlersForElement(element, type) {
-  const handlers = getHandlersForElement(element) || {};
-  if (!handlers[type]) handlers[type] = [];
+  const handlers = registered.get(element) || {};
+  if (!handlers[type]) handlers[type] = new Set();
   return handlers;
 }
 
 function add(element, type, handler) {
   const handlers = findOrCreateHandlersForElement(element, type);
-  handlers[type].push(handler);
+  handlers[type].add(handler);
   registered.set(element, handlers);
   element.addEventListener(type, handler);
 }
 
 function remove(element, type, handler) {
-  const handlers = getHandlersForElement(element);
-  var didRemove = false;
-  if (handlers) {
-    const typeHandlers = handlers[type];
-    if (typeHandlers) {
-      const filteredTypeHandlers = typeHandlers.filter(h => h !== handler);
-      didRemove = filteredTypeHandlers.length !== typeHandlers.length;
-      handlers[type] = filteredTypeHandlers;
-      if (handlers[type].length === 0) {
-        delete handlers[type];
-      }
-    }
-    if (didRemove) {
-      registered.set(element, handlers);
-      element.removeEventListener(type, handler);
-    }
-  }
+  const handlers = registered.get(element);
+  handlers[type].delete(handler);
+  registered.set(element, handlers);
+  element.removeEventListener(type, handler);
 }
 
 export default function toggleEventListener(
