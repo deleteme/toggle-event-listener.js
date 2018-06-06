@@ -14,5 +14,9 @@
   "description": "Declaratively add or remove DOM element event handlers",
   "main": "toggle-event-listener.js",
   "author": "mattga@gmail.com",
-  "private": false
+  "private": false,
+  "repository": {
+    "url": "https://github.com/deleteme/toggle-event-listener.js",
+    "type": "git"
+  }
 }
