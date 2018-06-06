@@ -18,5 +18,6 @@
   "repository": {
     "url": "https://github.com/deleteme/toggle-event-listener.js",
     "type": "git"
-  }
+  },
+  "homepage": "https://github.com/deleteme/toggle-event-listener.js"
 }
