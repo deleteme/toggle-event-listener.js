@@ -13,7 +13,7 @@
     "jest": "^22.4.3"
   },
   "name": "toggle-event-listener",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Declaratively add or remove DOM element event handlers",
   "main": "dist/toggle-event-listener.js",
   "module": "toggle-event-listener.js",
