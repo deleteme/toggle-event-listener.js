@@ -16,7 +16,6 @@
   "version": "0.2.1",
   "description": "Declaratively add or remove DOM element event handlers",
   "main": "dist/toggle-event-listener.js",
-  "module": "toggle-event-listener.js",
   "author": "mattga@gmail.com",
   "private": false,
   "repository": {
