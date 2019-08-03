@@ -43,26 +43,24 @@ export default function toggleEventListener(
   handler,
   shouldBeBound
 ) {
-  if (typeof type !== 'string')
-    throw new TypeError('Expected event type to be a string');
-  if (typeof handler !== 'function')
-    throw new TypeError('Expected event handler to be a function');
+  if (typeof type !== "string")
+    throw new TypeError("Expected event type to be a string");
+  if (typeof handler !== "function")
+    throw new TypeError("Expected event handler to be a function");
 
   const alreadyHasHandler = getAlreadyHasHandler(element, type, handler);
+  let func;
   // declarative mode
-  if (typeof shouldBeBound !== 'undefined') {
+  if (typeof shouldBeBound !== "undefined") {
     if (shouldBeBound) {
-      if (!alreadyHasHandler) add(element, type, handler);
+      if (!alreadyHasHandler) func = add;
     } else {
-      if (alreadyHasHandler) remove(element, type, handler);
+      if (alreadyHasHandler) func = remove;
     }
   } else {
     // toggling mode
-    if (alreadyHasHandler) {
-      remove(element, type, handler);
-    } else {
-      add(element, type, handler);
-    }
+    func = alreadyHasHandler ? remove : add;
   }
+  if (func) func(element, type, handler);
   return element;
 }
