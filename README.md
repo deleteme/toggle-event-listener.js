@@ -7,6 +7,10 @@
 * Assumes Weakmap and Set are globally available
 * Assumes DOM elements have `addEventListener` and `removeEventListener` methods
 
+## Demo
+
+https://toggle-event-listener-js-demo.glitch.me
+
 ## Install
 
 `npm install --save toggle-event-listener`
