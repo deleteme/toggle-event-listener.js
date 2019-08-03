@@ -43,7 +43,6 @@ export default function toggleEventListener(
   handler,
   shouldBeBound
 ) {
-  if (arguments.length < 3) throw new TypeError('Not enough arguments');
   if (typeof type !== 'string')
     throw new TypeError('Expected event type to be a string');
   if (typeof handler !== 'function')

@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`toggleEventListener() without required arguments should throw an error. 1`] = `"Not enough arguments"`;
+exports[`toggleEventListener() without required arguments should throw an error. 1`] = `"Expected event type to be a string"`;
 
-exports[`toggleEventListener() without required arguments should throw an error. 2`] = `"Not enough arguments"`;
+exports[`toggleEventListener() without required arguments should throw an error. 2`] = `"Expected event type to be a string"`;
 
-exports[`toggleEventListener() without required arguments should throw an error. 3`] = `"Not enough arguments"`;
+exports[`toggleEventListener() without required arguments should throw an error. 3`] = `"Expected event handler to be a function"`;
 
 exports[`toggleEventListener() without required arguments should throw an error. 4`] = `"Invalid value used as weak map key"`;
 
